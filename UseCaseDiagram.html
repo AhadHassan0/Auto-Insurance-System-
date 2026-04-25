@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Use Case Diagram — Auto Insurance System</title>
+<style>
+  body { margin:0; background:#f0f4f8; font-family:Arial,sans-serif; }
+  h2   { text-align:center; color:#1a252f; padding:16px 0 4px; font-size:1.4em; }
+  svg  { display:block; margin:0 auto; }
+</style>
+</head>
+<body>
+<h2>Use Case Diagram — Auto Insurance Information System</h2>
+<svg viewBox="0 0 1300 860" width="1280" height="840" xmlns="http://www.w3.org/2000/svg" font-family="Arial,sans-serif" font-size="12">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0,10 3.5,0 7" fill="#555"/>
+    </marker>
+  </defs>
+
+  <!-- System boundary -->
+  <rect x="200" y="30" width="900" height="800" rx="12" fill="#fafcff" stroke="#2980b9" stroke-width="2"/>
+  <text x="650" y="56" text-anchor="middle" font-size="15" font-weight="bold" fill="#1a252f">Auto Insurance Information System</text>
+
+  <!-- ── ACTORS ── -->
+  <!-- Manager -->
+  <g transform="translate(52,180)">
+    <circle cx="0" cy="0" r="18" fill="#eaf2fb" stroke="#2980b9" stroke-width="2"/>
+    <line x1="0" y1="18" x2="0" y2="52" stroke="#2980b9" stroke-width="2"/>
+    <line x1="-22" y1="34" x2="22" y2="34" stroke="#2980b9" stroke-width="2"/>
+    <line x1="0" y1="52" x2="-18" y2="75" stroke="#2980b9" stroke-width="2"/>
+    <line x1="0" y1="52" x2="18" y2="75" stroke="#2980b9" stroke-width="2"/>
+    <text x="0" y="94" text-anchor="middle" font-weight="bold" fill="#1a252f">Manager</text>
+  </g>
+
+  <!-- Salesman -->
+  <g transform="translate(52,420)">
+    <circle cx="0" cy="0" r="18" fill="#eafaf1" stroke="#27ae60" stroke-width="2"/>
+    <line x1="0" y1="18" x2="0" y2="52" stroke="#27ae60" stroke-width="2"/>
+    <line x1="-22" y1="34" x2="22" y2="34" stroke="#27ae60" stroke-width="2"/>
+    <line x1="0" y1="52" x2="-18" y2="75" stroke="#27ae60" stroke-width="2"/>
+    <line x1="0" y1="52" x2="18" y2="75" stroke="#27ae60" stroke-width="2"/>
+    <text x="0" y="94" text-anchor="middle" font-weight="bold" fill="#27ae60">Salesman</text>
+  </g>
+
+  <!-- Surveyor -->
+  <g transform="translate(52,660)">
+    <circle cx="0" cy="0" r="18" fill="#fdf2e9" stroke="#e67e22" stroke-width="2"/>
+    <line x1="0" y1="18" x2="0" y2="52" stroke="#e67e22" stroke-width="2"/>
+    <line x1="-22" y1="34" x2="22" y2="34" stroke="#e67e22" stroke-width="2"/>
+    <line x1="0" y1="52" x2="-18" y2="75" stroke="#e67e22" stroke-width="2"/>
+    <line x1="0" y1="52" x2="18" y2="75" stroke="#e67e22" stroke-width="2"/>
+    <text x="0" y="94" text-anchor="middle" font-weight="bold" fill="#e67e22">Surveyor</text>
+  </g>
+
+  <!-- ── HELPER MACROS via reuse ── -->
+  <!-- Use-case ellipse helper: defined inline below -->
+
+  <!-- ════ MANAGER USE CASES ════ -->
+  <!-- UC1 Login -->
+  <ellipse cx="370" cy="100" rx="90" ry="22" fill="#eaf2fb" stroke="#2980b9" stroke-width="1.5"/>
+  <text x="370" y="104" text-anchor="middle" font-size="11">Login</text>
+
+  <!-- UC2 Approve Claim -->
+  <ellipse cx="570" cy="145" rx="110" ry="22" fill="#eaf2fb" stroke="#2980b9" stroke-width="1.5"/>
+  <text x="570" y="149" text-anchor="middle" font-size="11">Approve / Reject Claim</text>
+
+  <!-- UC3 View Inspection Report -->
+  <ellipse cx="810" cy="145" rx="122" ry="22" fill="#eaf2fb" stroke="#2980b9" stroke-width="1.5"/>
+  <text x="810" y="149" text-anchor="middle" font-size="11">View Inspection Report</text>
+
+  <!-- UC4 Assign Surveyor -->
+  <ellipse cx="370" cy="195" rx="110" ry="22" fill="#eaf2fb" stroke="#2980b9" stroke-width="1.5"/>
+  <text x="370" y="199" text-anchor="middle" font-size="11">Assign Surveyor to Claim</text>
+
+  <!-- UC5 Assign Workshop -->
+  <ellipse cx="620" cy="195" rx="114" ry="22" fill="#eaf2fb" stroke="#2980b9" stroke-width="1.5"/>
+  <text x="620" y="199" text-anchor="middle" font-size="11">Assign Workshop to Claim</text>
+
+  <!-- UC6 Generate Reports -->
+  <ellipse cx="880" cy="195" rx="100" ry="22" fill="#eaf2fb" stroke="#2980b9" stroke-width="1.5"/>
+  <text x="880" y="199" text-anchor="middle" font-size="11">Generate Reports</text>
+
+  <!-- UC7 View New Customers -->
+  <ellipse cx="370" cy="248" rx="120" ry="22" fill="#eaf2fb" stroke="#2980b9" stroke-width="1.5"/>
+  <text x="370" y="252" text-anchor="middle" font-size="11">View New Customers (Month)</text>
+
+  <!-- UC8 View Pending Claims -->
+  <ellipse cx="640" cy="248" rx="120" ry="22" fill="#eaf2fb" stroke="#2980b9" stroke-width="1.5"/>
+  <text x="640" y="252" text-anchor="middle" font-size="11">View Pending Claims</text>
+
+  <!-- UC9 View Customer Claim History -->
+  <ellipse cx="900" cy="248" rx="136" ry="22" fill="#eaf2fb" stroke="#2980b9" stroke-width="1.5"/>
+  <text x="900" y="252" text-anchor="middle" font-size="11">View Customer Claim History</text>
+
+  <!-- UC10 Manage Workshops -->
+  <ellipse cx="450" cy="300" rx="110" ry="22" fill="#eaf2fb" stroke="#2980b9" stroke-width="1.5"/>
+  <text x="450" y="304" text-anchor="middle" font-size="11">Manage Workshops</text>
+
+  <!-- UC11 Manage Staff -->
+  <ellipse cx="700" cy="300" rx="100" ry="22" fill="#eaf2fb" stroke="#2980b9" stroke-width="1.5"/>
+  <text x="700" y="304" text-anchor="middle" font-size="11">Manage Staff</text>
+
+  <!-- UC12 View Expiring Policies -->
+  <ellipse cx="940" cy="300" rx="128" ry="22" fill="#eaf2fb" stroke="#2980b9" stroke-width="1.5"/>
+  <text x="940" y="304" text-anchor="middle" font-size="11">View Expiring Policies</text>
+
+  <!-- ════ SALESMAN USE CASES ════ -->
+  <ellipse cx="350" cy="430" rx="100" ry="22" fill="#eafaf1" stroke="#27ae60" stroke-width="1.5"/>
+  <text x="350" y="434" text-anchor="middle" font-size="11">Register Customer</text>
+
+  <ellipse cx="570" cy="430" rx="100" ry="22" fill="#eafaf1" stroke="#27ae60" stroke-width="1.5"/>
+  <text x="570" y="434" text-anchor="middle" font-size="11">Register Vehicle</text>
+
+  <ellipse cx="790" cy="430" rx="100" ry="22" fill="#eafaf1" stroke="#27ae60" stroke-width="1.5"/>
+  <text x="790" y="434" text-anchor="middle" font-size="11">Issue Policy</text>
+
+  <ellipse cx="1000" cy="430" rx="100" ry="22" fill="#eafaf1" stroke="#27ae60" stroke-width="1.5"/>
+  <text x="1000" y="434" text-anchor="middle" font-size="11">File Claim</text>
+
+  <ellipse cx="350" cy="490" rx="100" ry="22" fill="#eafaf1" stroke="#27ae60" stroke-width="1.5"/>
+  <text x="350" y="494" text-anchor="middle" font-size="11">Update Customer Info</text>
+
+  <ellipse cx="580" cy="490" rx="110" ry="22" fill="#eafaf1" stroke="#27ae60" stroke-width="1.5"/>
+  <text x="580" y="494" text-anchor="middle" font-size="11">View Customer Vehicles</text>
+
+  <ellipse cx="820" cy="490" rx="120" ry="22" fill="#eafaf1" stroke="#27ae60" stroke-width="1.5"/>
+  <text x="820" y="494" text-anchor="middle" font-size="11">View Customer Policies</text>
+
+  <!-- ════ SURVEYOR USE CASES ════ -->
+  <ellipse cx="380" cy="670" rx="130" ry="22" fill="#fdf2e9" stroke="#e67e22" stroke-width="1.5"/>
+  <text x="380" y="674" text-anchor="middle" font-size="11">View Assigned Claims</text>
+
+  <ellipse cx="650" cy="670" rx="140" ry="22" fill="#fdf2e9" stroke="#e67e22" stroke-width="1.5"/>
+  <text x="650" y="674" text-anchor="middle" font-size="11">Submit Inspection Report</text>
+
+  <ellipse cx="930" cy="670" rx="140" ry="22" fill="#fdf2e9" stroke="#e67e22" stroke-width="1.5"/>
+  <text x="930" y="674" text-anchor="middle" font-size="11">View My Inspection Reports</text>
+
+  <!-- ════ SHARED UC — Login ════ -->
+  <!-- Salesman → Login -->
+  <line x1="75" y1="420" x2="280" y2="100" stroke="#27ae60" stroke-width="1.2" stroke-dasharray="5,3"/>
+  <!-- Surveyor → Login -->
+  <line x1="75" y1="660" x2="280" y2="100" stroke="#e67e22" stroke-width="1.2" stroke-dasharray="5,3"/>
+
+  <!-- ════ ASSOCIATION LINES ════ -->
+  <!-- Manager to MG UCs -->
+  <line x1="70" y1="180" x2="280" y2="100"  stroke="#2980b9" stroke-width="1.5"/>
+  <line x1="70" y1="200" x2="460" y2="145"  stroke="#2980b9" stroke-width="1.5"/>
+  <line x1="70" y1="210" x2="688" y2="145"  stroke="#2980b9" stroke-width="1.5"/>
+  <line x1="70" y1="215" x2="260" y2="195"  stroke="#2980b9" stroke-width="1.5"/>
+  <line x1="70" y1="218" x2="506" y2="195"  stroke="#2980b9" stroke-width="1.5"/>
+  <line x1="70" y1="220" x2="780" y2="195"  stroke="#2980b9" stroke-width="1.5"/>
+  <line x1="70" y1="222" x2="250" y2="248"  stroke="#2980b9" stroke-width="1.5"/>
+  <line x1="70" y1="223" x2="520" y2="248"  stroke="#2980b9" stroke-width="1.5"/>
+  <line x1="70" y1="224" x2="764" y2="248"  stroke="#2980b9" stroke-width="1.5"/>
+  <line x1="70" y1="226" x2="340" y2="300"  stroke="#2980b9" stroke-width="1.5"/>
+  <line x1="70" y1="227" x2="600" y2="300"  stroke="#2980b9" stroke-width="1.5"/>
+  <line x1="70" y1="228" x2="812" y2="300"  stroke="#2980b9" stroke-width="1.5"/>
+
+  <!-- Salesman to SM UCs -->
+  <line x1="70" y1="420" x2="250" y2="430"  stroke="#27ae60" stroke-width="1.5"/>
+  <line x1="70" y1="428" x2="470" y2="430"  stroke="#27ae60" stroke-width="1.5"/>
+  <line x1="70" y1="436" x2="690" y2="430"  stroke="#27ae60" stroke-width="1.5"/>
+  <line x1="70" y1="442" x2="900" y2="430"  stroke="#27ae60" stroke-width="1.5"/>
+  <line x1="70" y1="448" x2="250" y2="490"  stroke="#27ae60" stroke-width="1.5"/>
+  <line x1="70" y1="452" x2="470" y2="490"  stroke="#27ae60" stroke-width="1.5"/>
+  <line x1="70" y1="456" x2="700" y2="490"  stroke="#27ae60" stroke-width="1.5"/>
+
+  <!-- Surveyor to SV UCs -->
+  <line x1="70" y1="660" x2="250" y2="670"  stroke="#e67e22" stroke-width="1.5"/>
+  <line x1="70" y1="668" x2="510" y2="670"  stroke="#e67e22" stroke-width="1.5"/>
+  <line x1="70" y1="676" x2="790" y2="670"  stroke="#e67e22" stroke-width="1.5"/>
+
+  <!-- «include» Login from all UCs -->
+  <line x1="370" y1="78" x2="370" y2="78" stroke="none"/>
+
+  <!-- Section dividers inside boundary -->
+  <line x1="210" y1="360" x2="1090" y2="360" stroke="#bbb" stroke-dasharray="6,4"/>
+  <line x1="210" y1="560" x2="1090" y2="560" stroke="#bbb" stroke-dasharray="6,4"/>
+
+  <!-- Section labels -->
+  <text x="215" y="380" fill="#2980b9" font-size="10" font-style="italic">Manager functions</text>
+  <text x="215" y="580" fill="#27ae60" font-size="10" font-style="italic">Salesman functions</text>
+  <text x="215" y="640" fill="#e67e22" font-size="10" font-style="italic">Surveyor functions</text>
+
+  <!-- «include» note for Login -->
+  <text x="370" y="90" text-anchor="middle" font-size="9" fill="#888">«include» Login — shared by all actors</text>
+
+  <!-- Legend -->
+  <rect x="1100" y="40" width="185" height="80" rx="6" fill="#fff" stroke="#aaa"/>
+  <text x="1110" y="58" font-weight="bold" fill="#1a252f">Legend</text>
+  <circle cx="1120" cy="74" r="8" fill="none" stroke="#555" stroke-width="1.5"/>
+  <text x="1135" y="78" font-size="10">Actor</text>
+  <ellipse cx="1120" cy="96" rx="22" ry="10" fill="#eaf2fb" stroke="#2980b9" stroke-width="1.5"/>
+  <text x="1148" y="100" font-size="10">Use Case</text>
+</svg>
+</body>
+</html>

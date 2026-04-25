@@ -1,0 +1,319 @@
+
+<style>
+#cd { padding: 1rem 0; }
+#cd svg { max-width: 100%; }
+</style>
+<div id="cd"></div>
+<script type="module">
+import mermaid from 'https://esm.sh/mermaid@11/dist/mermaid.esm.min.mjs';
+const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+await document.fonts.ready;
+mermaid.initialize({
+  startOnLoad: false,
+  theme: 'base',
+  fontFamily: '"Anthropic Sans", sans-serif',
+  look: 'classic',
+  classDiagram: { curve: 'linear' },
+  themeVariables: {
+    darkMode: dark,
+    fontSize: '13px',
+    fontFamily: '"Anthropic Sans", sans-serif',
+    lineColor: dark ? '#9c9a92' : '#73726c',
+    textColor: dark ? '#c2c0b6' : '#3d3d3a',
+    classText: dark ? '#c2c0b6' : '#3d3d3a',
+    primaryColor: dark ? '#1e3a5f' : '#e6f1fb',
+    primaryBorderColor: dark ? '#3a6fa8' : '#185fa5',
+    primaryTextColor: dark ? '#b5d4f4' : '#042C53',
+    secondaryColor: dark ? '#1a3a2a' : '#eafaf1',
+    secondaryBorderColor: dark ? '#2d7a50' : '#27ae60',
+    tertiaryColor: dark ? '#3a2a10' : '#faeeda',
+    tertiaryBorderColor: dark ? '#9a6010' : '#ba7517',
+  },
+});
+const diagram = `classDiagram
+  direction TB
+
+  class Customer {
+    +string customerId
+    +string name
+    +string phone
+    +string email
+    +string address
+    +string dateRegistered
+  }
+
+  class Vehicle {
+    +string vehicleId
+    +string customerId
+    +string make
+    +string model
+    +string year
+    +string licensePlate
+    +string engineNo
+    +string chassisNo
+  }
+
+  class InsurancePolicy {
+    +string policyId
+    +string customerId
+    +string vehicleId
+    +string startDate
+    +string endDate
+    +double premiumAmount
+    +string coverageType
+    +string status
+  }
+
+  class Claim {
+    +string claimId
+    +string policyId
+    +string customerId
+    +string vehicleId
+    +string dateOfAccident
+    +string description
+    +double estimatedAmount
+    +double approvedAmount
+    +string status
+    +string surveyorId
+    +string workshopId
+    +string dateFiled
+    +string dateResolved
+  }
+
+  class Inspection {
+    +string inspectionId
+    +string claimId
+    +string surveyorId
+    +string inspectionDate
+    +string findings
+    +double estimatedRepairCost
+    +string recommendation
+    +string reportSubmitted
+  }
+
+  class Workshop {
+    +string workshopId
+    +string name
+    +string address
+    +string phone
+    +string registrationNo
+    +string status
+  }
+
+  class Staff {
+    +string staffId
+    +string name
+    +string role
+    +string username
+    +string password
+    +string dateJoined
+  }
+
+  class FileManager {
+    <<data layer>>
+    +loadCustomers() vector
+    +saveCustomers(list) void
+    +loadVehicles() vector
+    +saveVehicles(list) void
+    +loadPolicies() vector
+    +savePolicies(list) void
+    +loadClaims() vector
+    +saveClaims(list) void
+    +loadInspections() vector
+    +saveInspections(list) void
+    +loadWorkshops() vector
+    +saveWorkshops(list) void
+    +loadStaff() vector
+    +saveStaff(list) void
+    +generateId(prefix) string
+  }
+
+  class CustomerService {
+    <<business layer>>
+    +addCustomer(c) bool
+    +updateCustomer(c) bool
+    +deleteCustomer(id) bool
+    +getCustomer(id) Customer
+    +getAllCustomers() vector
+    +getNewCustomersInMonth(ym) vector
+    +customerExists(id) bool
+  }
+
+  class VehicleService {
+    <<business layer>>
+    +addVehicle(v) bool
+    +updateVehicle(v) bool
+    +deleteVehicle(id) bool
+    +getVehicle(id) Vehicle
+    +getVehiclesByCustomer(cid) vector
+    +vehicleExists(id) bool
+  }
+
+  class PolicyService {
+    <<business layer>>
+    +addPolicy(p) bool
+    +cancelPolicy(id) bool
+    +getPolicy(id) InsurancePolicy
+    +getActivePolicies() vector
+    +getPoliciesByCustomer(cid) vector
+    +isPolicyActive(id) bool
+  }
+
+  class ClaimService {
+    <<business layer>>
+    +fileClaim(c) bool
+    +assignSurveyor(cid, sid) bool
+    +assignWorkshop(cid, wid) bool
+    +approveClaim(id, amt) bool
+    +rejectClaim(id) bool
+    +getClaim(id) Claim
+    +getPendingClaims() vector
+    +getClaimsByCustomer(cid) vector
+  }
+
+  class InspectionService {
+    <<business layer>>
+    +submitInspection(ins) bool
+    +updateInspection(ins) bool
+    +getInspection(id) Inspection
+    +getInspectionByClaim(cid) Inspection
+    +getInspectionsBySurveyor(sid) vector
+  }
+
+  class WorkshopService {
+    <<business layer>>
+    +addWorkshop(w) bool
+    +deactivateWorkshop(id) bool
+    +getWorkshop(id) Workshop
+    +getActiveWorkshops() vector
+    +workshopExists(id) bool
+  }
+
+  class StaffService {
+    <<business layer>>
+    +addStaff(s) bool
+    +removeStaff(id) bool
+    +getStaff(id) Staff
+    +getStaffByRole(role) vector
+    +getStaffByUsername(u) Staff
+  }
+
+  class AuthService {
+    <<business layer>>
+    -Staff currentUser
+    -bool loggedIn
+    +login(user, pass) Staff
+    +logout() void
+    +getCurrentUser() Staff
+    +isLoggedIn() bool
+  }
+
+  class ReportService {
+    <<business layer>>
+    +newCustomersInMonth(ym) vector
+    +pendingClaims() vector
+    +allInspectionReports() vector
+    +claimHistoryForCustomer(cid) vector
+    +expiringPolicies(days) vector
+    +summaryReport() string
+  }
+
+  class ManagerMenu {
+    <<UI layer>>
+    +show() void
+    -manageCustomers() void
+    -manageClaims() void
+    -manageWorkshops() void
+    -manageStaff() void
+    -viewReports() void
+    -approveClaim() void
+    -rejectClaim() void
+  }
+
+  class SalesmanMenu {
+    <<UI layer>>
+    +show() void
+    -addCustomer() void
+    -addVehicle() void
+    -addPolicy() void
+    -fileClaim() void
+  }
+
+  class SurveyorMenu {
+    <<UI layer>>
+    +show() void
+    -viewMyAssignedClaims() void
+    -submitInspectionReport() void
+    -viewMyInspections() void
+  }
+
+  class App {
+    <<entry point>>
+    +run() void
+    -loginScreen() void
+    -seedDefaultAdmin() void
+  }
+
+  Customer "1" --> "0..*" Vehicle : owns
+  Customer "1" --> "0..*" InsurancePolicy : holds
+  Vehicle "1" --> "0..*" InsurancePolicy : covered by
+  InsurancePolicy "1" --> "0..*" Claim : generates
+  Claim "1" --> "0..1" Inspection : inspected via
+  Claim "0..*" --> "0..1" Workshop : repaired at
+  Staff "1" --> "0..*" Claim : surveys
+
+  CustomerService  ..> FileManager : uses
+  VehicleService   ..> FileManager : uses
+  PolicyService    ..> FileManager : uses
+  ClaimService     ..> FileManager : uses
+  InspectionService ..> FileManager : uses
+  WorkshopService  ..> FileManager : uses
+  StaffService     ..> FileManager : uses
+  AuthService      ..> StaffService : uses
+
+  ManagerMenu  ..> CustomerService   : uses
+  ManagerMenu  ..> ClaimService      : uses
+  ManagerMenu  ..> InspectionService : uses
+  ManagerMenu  ..> WorkshopService   : uses
+  ManagerMenu  ..> StaffService      : uses
+  ManagerMenu  ..> ReportService     : uses
+  SalesmanMenu ..> CustomerService   : uses
+  SalesmanMenu ..> VehicleService    : uses
+  SalesmanMenu ..> PolicyService     : uses
+  SalesmanMenu ..> ClaimService      : uses
+  SurveyorMenu ..> ClaimService      : uses
+  SurveyorMenu ..> InspectionService : uses
+  App          ..> AuthService       : uses
+`;
+
+const { svg } = await mermaid.render('cd-svg', diagram);
+document.getElementById('cd').innerHTML = svg;
+
+// Force all connector paths to use straight polylines instead of curves
+setTimeout(() => {
+  document.querySelectorAll('#cd svg path.relation, #cd svg path[class*="edge"]').forEach(p => {
+    const d = p.getAttribute('d');
+    if (!d) return;
+    // Extract all coordinate pairs and build a straight polyline
+    const nums = [...d.matchAll(/[\d.]+/g)].map(m => parseFloat(m[0]));
+    if (nums.length < 4) return;
+    // Take start and end points only for a straight line
+    const coords = [];
+    let i = 0;
+    const re = /[MmLlCcSsQqTtAaZz]([^MmLlCcSsQqTtAaZz]*)/g;
+    let match;
+    const segments = [];
+    while ((match = re.exec(d)) !== null) {
+      segments.push({ cmd: match[0][0], args: match[1].trim().split(/[\s,]+/).map(Number).filter(n => !isNaN(n)) });
+    }
+    if (segments.length < 2) return;
+    const first = segments[0];
+    const last = segments[segments.length - 1];
+    const x1 = first.args[0], y1 = first.args[1];
+    const largs = last.args;
+    const x2 = largs[largs.length - 2], y2 = largs[largs.length - 1];
+    if (isNaN(x1) || isNaN(y1) || isNaN(x2) || isNaN(y2)) return;
+    p.setAttribute('d', `M${x1},${y1} L${x2},${y2}`);
+  });
+}, 300);
+</script>
